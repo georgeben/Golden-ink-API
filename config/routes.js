@@ -10,5 +10,9 @@
 
 module.exports.routes = {
 
-
+  'POST /api/v1/auth/google': { action: 'users/google-sign-in' },
+  'GET /api/v1/topics': { action: 'topics/get-topics' },
+  'POST /api/v1/topics': { action: 'topics/add-topic' },
+  'PUT /api/v1/topics/:slug': { action: 'topics/update-topic' },
+  'GET /api/v1/topics/:slug': { action: 'topics/get-single-topic' },
 };
