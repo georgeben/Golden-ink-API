@@ -45,20 +45,20 @@ module.exports = function badRequest(optionalData) {
   // response body to send.  Otherwise, send down its `.stack`,
   // except in production use res.sendStatus().
   else if (_.isError(optionalData)) {
-    console.log('It was an error!');
     sails.log.info('Custom response `res.badRequest()` called with an Error:', optionalData);
 
     // If the error doesn't have a custom .toJSON(), use its `stack` instead--
     // otherwise res.json() would turn it into an empty dictionary.
     // (If this is production, don't send a response body at all.)
     if (!_.isFunction(optionalData.toJSON)) {
-      console.log('It has a toJSON function!')
       if (process.env.NODE_ENV === 'production') {
         return res.sendStatus(statusCodeToSet);
       }
       else {
         return res.status(statusCodeToSet).send(optionalData.stack);
       }
+    } else {
+      return res.status(statusCodeToSet).json(optionalData);
     }
   }
   // Set status code and send response data.

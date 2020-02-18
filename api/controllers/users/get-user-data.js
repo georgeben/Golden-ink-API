@@ -11,21 +11,32 @@ module.exports = {
     unauthorized: {
       description: 'The user\'s data could not be retrieved',
       responseType: 'unauthorized',
+    },
+    serverError: {
+      description: 'Something unexpected happened',
+      responseType: 'serverError'
     }
   },
 
 
   fn: async function () {
-
-    const user = await Users.findOne({
-      id: this.req.user.id,
-    });
-    if (!user) {
-      throw 'unauthorized';
+    try {
+      const user = await Users.findOne({
+        id: this.req.user.id,
+      })
+      .populate('stories');
+      if (!user) {
+        throw 'unauthorized';
+      }
+      return {
+        user,
+      };
+    } catch (error) {
+      console.log(error);
+      throw {
+        serverError: error,
+      }
     }
-    return {
-      user,
-    };
 
   }
 

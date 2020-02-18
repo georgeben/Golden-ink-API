@@ -36,7 +36,6 @@ module.exports = {
     author: {
       description: 'The author of the story',
       model: 'users',
-      via: 'stories'
     },
     likedBy: {
       description: 'A collection of people that have liked a story',
