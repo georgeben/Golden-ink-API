@@ -24,7 +24,6 @@ module.exports = {
     username: {
       description: 'A unique string used to identify users',
       type: 'string',
-      required: true,
       unique: true,
       maxLength: 50
     },

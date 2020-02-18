@@ -31,7 +31,8 @@
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     "Promise": true,
     "sails": true,
-    "_": true
+    "_": true,
+    // "exits": true
     // …and any others (e.g. `"Organization": true`)
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   },
@@ -65,7 +66,7 @@
     "no-return-assign":             ["error", "always"],
     "no-sequences":                 ["error"],
     "no-trailing-spaces":           ["warn"],
-    "no-undef":                     ["off"],
+    "no-undef":                     ["warn"],
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // ^^Note: If this "no-undef" rule is enabled (set to `["error"]`), then all model globals
     // (e.g. `"Organization": true`) should be included above under "globals".
