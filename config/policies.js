@@ -18,5 +18,6 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  'users/get-user-data': 'isLoggedIn',
 
 };

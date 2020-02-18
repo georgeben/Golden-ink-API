@@ -41,10 +41,13 @@ module.exports = {
         googleId: payload.sub
       });
       if (existingUser) {
+        const token = await sails.helpers.generateAuthToken.with({
+          payload: existingUser,
+        });
         return {
           message: 'Successfully signed in',
           user: existingUser,
-          token: 'hello',
+          token,
         };
       }
       let newUser = {
@@ -60,10 +63,13 @@ module.exports = {
       };
 
       newUser = await Users.create(newUser).fetch();
+      const token = await sails.helpers.generateAuthToken.with({
+        payload: newUser,
+      });
       return {
         message: 'Signed up successfully',
         user: newUser,
-        token: 'hello',
+        token,
       };
     } catch (error) {
       console.log(error);
