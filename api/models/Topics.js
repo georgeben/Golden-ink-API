@@ -24,9 +24,28 @@ module.exports = {
     stories: {
       collection: 'stories',
       via: 'topic',
+    },
+    slug: {
+      description: 'A unique string to identify a topic',
+      type: 'string',
+      unique: true,
     }
 
   },
+
+  beforeCreate: async function (recordToCreate, proceed) {
+    // Create slug
+    const slug = await sails.helpers.createSlug('topics', recordToCreate.name);
+    recordToCreate.slug = slug;
+    return proceed();
+  },
+
+  beforeUpdate: async function (valuesToSet, proceed) {
+    // Create slug
+    const slug = await sails.helpers.createSlug('topics', valuesToSet.name);
+    valuesToSet.slug = slug;
+    return proceed();
+  }
 
 };
 
