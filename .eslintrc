@@ -32,6 +32,11 @@
     "Promise": true,
     "sails": true,
     "_": true,
+    "Users": true,
+    "Topics": true,
+    "Stories": true,
+    "Comments": true,
+    "Notifications": true,
     // "exits": true
     // …and any others (e.g. `"Organization": true`)
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -41,6 +46,7 @@
     "block-scoped-var":             ["error"],
     "callback-return":              ["error", ["done", "proceed", "next", "onwards", "callback", "cb"]],
     "camelcase":                    ["warn", {"properties":"always"}],
+    "no-console": ["warn"],
     "comma-style":                  ["warn", "last"],
     "curly":                        ["warn"],
     "eqeqeq":                       ["error", "always"],

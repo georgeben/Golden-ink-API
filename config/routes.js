@@ -9,7 +9,7 @@
  */
 
 module.exports.routes = {
-
+  // AUTH ENDPOINTS
   'POST /api/v1/auth/google': { action: 'users/google-sign-in' },
 
   // TOPIC ENDPOINTS
@@ -19,5 +19,8 @@ module.exports.routes = {
   'GET /api/v1/topics/:slug': { action: 'topics/get-single-topic' },
 
   //STORIES ENDPOINT
-  'GET /api/v1/stories': { action: 'stories/get-stories' }
+  'GET /api/v1/stories': { action: 'stories/get-stories' },
+
+  // USER ENDPOINTS
+  'GET /api/v1/users': { action: 'users/get-user-data' }
 };
