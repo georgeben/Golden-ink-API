@@ -20,6 +20,7 @@ module.exports.routes = {
 
   //STORIES ENDPOINT
   'GET /api/v1/stories': { action: 'stories/get-stories' },
+  'GET /api/v1/stories/:slug': { action: 'stories/get-story' },
 
   // USER ENDPOINTS
   'GET /api/v1/users': { action: 'users/get-user-data' },
