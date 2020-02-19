@@ -32,10 +32,13 @@ module.exports = {
         user,
       };
     } catch (error) {
-      console.log(error);
+      sails.log.error(error);
+      if (error === 'unauthorized') {
+        throw error;
+      }
       throw {
         serverError: error,
-      }
+      };
     }
 
   }

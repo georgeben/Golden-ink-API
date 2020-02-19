@@ -24,6 +24,7 @@ module.exports.routes = {
 
   // USER ENDPOINTS
   'GET /api/v1/users': { action: 'users/get-user-data' },
+  'GET /api/v1/users/profile/:slug': { action: 'users/get-public-profile' },
   'POST /api/v1/users/stories': { action: 'users/create-story' },
   'GET /api/v1/users/stories': { action: 'users/get-user-stories' },
   'GET /api/v1/users/stories/:slug': { action: 'users/get-user-story' },
