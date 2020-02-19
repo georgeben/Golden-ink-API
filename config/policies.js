@@ -26,5 +26,6 @@ module.exports.policies = {
   'users/get-user-story': 'isLoggedIn',
   'users/update-profile': 'isLoggedIn',
   'comments/add-comment': 'isLoggedIn',
-  'comments/update-comment': 'isLoggedIn'
+  'comments/update-comment': 'isLoggedIn',
+  'comments/delete-comment': 'isLoggedIn',
 };

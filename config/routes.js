@@ -25,6 +25,7 @@ module.exports.routes = {
   'POST /api/v1/stories/:story/comments': { action: 'comments/add-comment' },
   'GET /api/v1/stories/:story/comments': { action: 'comments/get-comments' },
   'PUT /api/v1/stories/:story/comments/:commentId': { action: 'comments/update-comment' },
+  'DELETE /api/v1/stories/:story/comments/:commentId': { action: 'comments/delete-comment' },
 
   // USER ENDPOINTS
   'GET /api/v1/users': { action: 'users/get-user-data' },
