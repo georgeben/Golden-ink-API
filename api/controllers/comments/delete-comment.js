@@ -46,6 +46,10 @@ module.exports = {
       story: story.id,
     });
 
+    if (!comment) {
+      throw 'notFound';
+    }
+
     const user = this.req.user;
 
     if (comment.user !== user.id) {

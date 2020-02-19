@@ -24,6 +24,7 @@ module.exports.routes = {
   'GET /api/v1/stories/:slug': { action: 'stories/get-story' },
   'POST /api/v1/stories/:story/comments': { action: 'comments/add-comment' },
   'GET /api/v1/stories/:story/comments': { action: 'comments/get-comments' },
+  'GET /api/v1/stories/:story/comments/:commentId': { action: 'comments/get-comment' },
   'PUT /api/v1/stories/:story/comments/:commentId': { action: 'comments/update-comment' },
   'DELETE /api/v1/stories/:story/comments/:commentId': { action: 'comments/delete-comment' },
 
@@ -37,4 +38,5 @@ module.exports.routes = {
   'PUT /api/v1/users/stories/:slug': { action: 'users/update-story' },
   'DELETE /api/v1/users/stories/:slug': { action: 'users/delete-story' },
   'PUT /api/v1/users/profile': { action: 'users/update-profile' },
+  'PUT /api/v1/users/likes/:story': { action: 'users/like-story' },
 };

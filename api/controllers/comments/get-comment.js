@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Update comment',
+  friendlyName: 'Get comment',
 
 
-  description: '',
+  description: 'Retrieve data about a comment',
 
 
   inputs: {
@@ -16,18 +16,10 @@ module.exports = {
       type: 'number',
       required: true,
     },
-    content: {
-      type: 'string',
-      required: true,
-    }
   },
 
 
   exits: {
-    forbidden: {
-      description: 'The user is restricted from updating the story',
-      responseType: 'forbidden',
-    },
     notFound: {
       description: 'No topic with the specified slug was found in the database.',
       responseType: 'notFound'
@@ -36,7 +28,6 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    // Check that the story exists
     const story = await Stories.findOne({
       slug: inputs.story,
       private: false,
@@ -49,26 +40,16 @@ module.exports = {
     const comment = await Comments.findOne({
       id: inputs.commentId,
       story: story.id,
-    });
+    })
+      .populate('user')
+      .populate('subComments');
 
     if (!comment) {
       throw 'notFound';
     }
-
-    const user = this.req.user;
-
-    if (comment.user !== user.id) {
-      throw 'forbidden';
-    }
-    const updatedComment = await Comments.updateOne({
-      id: inputs.commentId,
-    }).set({
-      content: inputs.content
-    });
-
+    // All done.
     return {
-      message: 'Successfully updated comment',
-      data: updatedComment
+      data: comment
     };
 
   }
