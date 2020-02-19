@@ -17,6 +17,7 @@ module.exports.routes = {
   'POST /api/v1/topics': { action: 'topics/add-topic' },
   'PUT /api/v1/topics/:slug': { action: 'topics/update-topic' },
   'GET /api/v1/topics/:slug': { action: 'topics/get-single-topic' },
+  'GET /api/v1/topics/:slug/stories': { action: 'topics/get-topic-stories' },
 
   //STORIES ENDPOINT
   'GET /api/v1/stories': { action: 'stories/get-stories' },
