@@ -29,5 +29,5 @@ module.exports.routes = {
   'GET /api/v1/users/stories/:slug': { action: 'users/get-user-story' },
   'PUT /api/v1/users/stories/:slug': { action: 'users/update-story' },
   'DELETE /api/v1/users/stories/:slug': { action: 'users/delete-story' },
-  'PUT /api/v1/users/update-profile': { action: 'users/update-profile' },
+  'PUT /api/v1/users/profile': { action: 'users/update-profile' },
 };
