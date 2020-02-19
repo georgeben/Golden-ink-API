@@ -72,6 +72,9 @@ module.exports = {
       };
     } catch (error) {
       console.log(error);
+      if (error.badRequest) {
+        throw error;
+      }
       throw 'serverError';
     }
 

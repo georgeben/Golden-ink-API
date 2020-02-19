@@ -19,6 +19,10 @@ module.exports = {
       type: 'string',
       required: true
     },
+    slug: {
+      type: 'string',
+      unique: true,
+    },
     topic: {
       description: 'The topic a story is related to',
       model: 'topics'
@@ -49,6 +53,18 @@ module.exports = {
     }
 
   },
+
+  beforeCreate: async function (recordToCreate, proceed) {
+    const slug = await sails.helpers.createSlug('stories', recordToCreate.title);
+    recordToCreate.slug = slug;
+    return proceed();
+  },
+
+  beforeUpdate: async function (valuesToSet, proceed) {
+    const slug = await sails.helpers.createSlug('stories', valuesToSet.title);
+    valuesToSet.slug = slug;
+    return proceed();
+  }
 
 };
 

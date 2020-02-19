@@ -34,10 +34,9 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    // TODO
     const modelNames = Object.keys(sails.models);
     if (!modelNames.includes(inputs.modelName)) {
-      throw new Error('Model not found')
+      throw new Error('Model not found');
     }
 
     let slug = slugify(inputs.value.toLowerCase(), {

@@ -27,6 +27,10 @@ module.exports = {
       unique: true,
       maxLength: 50
     },
+    slug: {
+      type: 'string',
+      unique: true,
+    },
     headline: {
       description: 'A user\'s profile headline',
       type: 'string',
@@ -107,6 +111,23 @@ module.exports = {
   },
   customToJSON: function () {
     return _.omit(this, ['googleId', 'deactivated']);
+  },
+  beforeCreate: async function (recordToCreate, proceed) {
+    const slug = await sails.helpers.createSlug.with({
+      modelName: 'users',
+      value: recordToCreate.name
+    });
+    recordToCreate.slug = slug;
+    return proceed();
+  },
+
+  beforeUpdate: async function (valuesToSet, proceed) {
+    const slug = await sails.helpers.createSlug.with({
+      modelName: 'users',
+      value: valuesToSet.name
+    });
+    valuesToSet.slug = slug;
+    return proceed();
   }
 
 };
