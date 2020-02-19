@@ -17,7 +17,9 @@ module.exports = {
     const publiclyAvailableStories = await Stories.find({
       private: false,
       draft: false,
-    });
+    })
+      .populate('comments')
+      .populate('author');
     // All done.
     return {
       stories: publiclyAvailableStories,

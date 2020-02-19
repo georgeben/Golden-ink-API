@@ -27,7 +27,9 @@ module.exports = {
     const story = await Stories.findOne({
       slug: inputs.slug,
       author: this.req.user.id,
-    });
+    })
+    .populate('comments')
+    .populate('author');
     if (!story) {
       throw 'notFound';
     }

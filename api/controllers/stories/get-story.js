@@ -29,7 +29,9 @@ module.exports = {
       slug: inputs.slug,
       private: false,
       draft: false,
-    });
+    })
+    .populate('comments')
+    .populate('author');
     if (!story) {
       throw 'notFound';
     }

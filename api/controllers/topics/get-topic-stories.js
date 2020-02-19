@@ -35,7 +35,9 @@ module.exports = {
       topic: topic.id,
       private: false,
       draft: false,
-    });
+    })
+    .populate('comments')
+    .populate('author');
 
     return {
       stories,

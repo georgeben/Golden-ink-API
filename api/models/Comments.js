@@ -11,7 +11,6 @@ module.exports = {
     user: {
       description: 'The user who made the comment',
       model: 'users',
-      via: 'comments',
       required: true,
     },
     content: {
@@ -29,7 +28,6 @@ module.exports = {
     },
     parentComment: {
       model: 'comments',
-      via: 'subComments',
     }
 
   },

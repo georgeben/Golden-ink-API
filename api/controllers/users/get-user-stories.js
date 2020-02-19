@@ -20,13 +20,15 @@ module.exports = {
     try {
       const stories = await Stories.find({
         author: user.id
-      });
+      })
+      .populate('comments')
+      .populate('author');
 
       return {
         stories,
       };
     } catch (error) {
-      console.log(error);
+      sails.log.error(error);
       throw 'serverError';
     }
   }
