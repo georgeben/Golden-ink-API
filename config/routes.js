@@ -23,6 +23,7 @@ module.exports.routes = {
   'GET /api/v1/stories': { action: 'stories/get-stories' },
   'GET /api/v1/stories/:slug': { action: 'stories/get-story' },
   'POST /api/v1/stories/:story/comments': { action: 'comments/add-comment' },
+  'GET /api/v1/stories/:story/comments': { action: 'comments/get-comments' },
 
   // USER ENDPOINTS
   'GET /api/v1/users': { action: 'users/get-user-data' },
