@@ -122,6 +122,9 @@ module.exports = {
   },
 
   beforeUpdate: async function (valuesToSet, proceed) {
+    if (!valuesToSet.name) {
+      return proceed();
+    }
     const slug = await sails.helpers.createSlug.with({
       modelName: 'users',
       value: valuesToSet.name

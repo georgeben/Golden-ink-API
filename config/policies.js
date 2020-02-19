@@ -22,5 +22,6 @@ module.exports.policies = {
   'users/create-story': 'isLoggedIn',
   'users/get-user-stories': 'isLoggedIn',
   'users/update-story': 'isLoggedIn',
-  'users/delete-story': 'isLoggedIn'
+  'users/delete-story': 'isLoggedIn',
+  'users/get-user-story': 'isLoggedIn'
 };
