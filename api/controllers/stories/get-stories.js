@@ -22,7 +22,7 @@ module.exports = {
       .populate('author');
     // All done.
     return {
-      stories: publiclyAvailableStories,
+      data: publiclyAvailableStories,
     };
 
   }

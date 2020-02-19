@@ -46,8 +46,10 @@ module.exports = {
         });
         return {
           message: 'Successfully signed in',
-          user: existingUser,
-          token,
+          data: {
+            user: existingUser,
+            token,
+          },
         };
       }
       let newUser = {
@@ -68,11 +70,13 @@ module.exports = {
       });
       return {
         message: 'Signed up successfully',
-        user: newUser,
-        token,
+        data: {
+          newUser,
+          token,
+        },
       };
     } catch (error) {
-      console.log(error);
+      sails.log.error(error);
       if (error.toString().includes('Error: Wrong number of segments in token:')) {
         throw {
           badRequest: 'Invalid googleIDToken',

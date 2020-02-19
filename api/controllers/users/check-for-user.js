@@ -39,12 +39,12 @@ module.exports = {
     const user = await Users.findOne(criteria);
     if (!user) {
       return {
-        userExists: false,
+        data: false,
       };
     }
 
     return {
-      userExists: true,
+      data: true,
     };
 
   }

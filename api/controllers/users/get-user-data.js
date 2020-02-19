@@ -29,7 +29,7 @@ module.exports = {
         throw 'unauthorized';
       }
       return {
-        user,
+        data: user,
       };
     } catch (error) {
       sails.log.error(error);

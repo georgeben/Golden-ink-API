@@ -44,7 +44,7 @@ module.exports = {
 
     // All done.
     return {
-      topic: updatedTopic
+      data: updatedTopic
     };
 
   }

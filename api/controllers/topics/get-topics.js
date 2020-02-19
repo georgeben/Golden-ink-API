@@ -22,11 +22,10 @@ module.exports = {
     try {
       const topics = await Topics.find();
       return {
-        topics,
+        data: topics,
       };
     } catch (error) {
-      console.log(error);
-      // sails.log()
+      sails.log.error(error);
       throw {
         serverError: error,
       };

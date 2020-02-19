@@ -36,7 +36,7 @@ module.exports = {
     const topic = await Topics.create(inputs).fetch();
     return {
       message: 'Successfully created topic',
-      topic,
+      data: topic,
     };
 
   }

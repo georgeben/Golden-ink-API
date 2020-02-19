@@ -34,7 +34,7 @@ module.exports = {
       throw 'notFound';
     }
     return {
-      story,
+      data: story,
     };
 
   }

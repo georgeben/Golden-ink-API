@@ -25,7 +25,7 @@ module.exports = {
       .populate('author');
 
       return {
-        stories,
+        data: stories,
       };
     } catch (error) {
       sails.log.error(error);

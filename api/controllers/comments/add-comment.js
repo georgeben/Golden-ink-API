@@ -47,7 +47,7 @@ module.exports = {
 
     return {
       message: 'Successfully added comment',
-      comment,
+      data: comment,
     };
 
   }

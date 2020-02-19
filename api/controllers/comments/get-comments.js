@@ -40,7 +40,7 @@ module.exports = {
       .populate('subComments');
     // All done.
     return {
-      comments,
+      data: comments,
     };
 
   }

@@ -27,7 +27,7 @@ module.exports = {
 
     user.stories = user.stories.filter(story => story.private === false && story.draft === false);
     return {
-      user,
+      data: user,
     };
 
   }

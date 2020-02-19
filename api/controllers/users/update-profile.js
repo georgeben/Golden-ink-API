@@ -35,7 +35,7 @@ module.exports = {
       id: user.id,
     }).set(inputs);
     return {
-      user: updatedUser,
+      data: updatedUser,
     };
 
   }

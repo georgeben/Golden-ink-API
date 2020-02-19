@@ -33,7 +33,7 @@ module.exports = {
     }
     // All done.
     return {
-      topic,
+      data: topic,
     };
 
   }

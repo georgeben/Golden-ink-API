@@ -53,7 +53,7 @@ module.exports = {
     });
     return {
       message: 'Successfully deleted story',
-      result,
+      data: result,
     };
 
   }

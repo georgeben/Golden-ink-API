@@ -40,7 +40,7 @@ module.exports = {
     .populate('author');
 
     return {
-      stories,
+      data: stories,
     };
 
   }

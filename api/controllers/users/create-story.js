@@ -68,10 +68,10 @@ module.exports = {
       const newStory = await Stories.create(storyData).fetch();
       return {
         message: 'Successfully created story',
-        story: newStory,
+        data: newStory,
       };
     } catch (error) {
-      console.log(error);
+      sails.log.error(error);
       if (error.badRequest) {
         throw error;
       }

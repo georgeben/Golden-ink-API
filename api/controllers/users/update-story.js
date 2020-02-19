@@ -97,7 +97,7 @@ module.exports = {
 
       return {
         message: 'Successfully updated story',
-        story: updatedStory,
+        data: updatedStory,
       };
     } catch (error) {
       sails.log.error(error);
