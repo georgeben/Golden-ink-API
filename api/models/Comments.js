@@ -21,7 +21,6 @@ module.exports = {
     },
     story: {
       model: 'stories',
-      via: 'comments',
       required: true
     },
     subComments: {

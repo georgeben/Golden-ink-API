@@ -40,7 +40,7 @@ module.exports = {
     }
 
     let slug = slugify(inputs.value.toLowerCase(), {
-      remove: /[*+~.()'"!:@]/g
+      remove: /[*+~.()'"!:@?]/g
     });
     let existingRecord = await sails.models[inputs.modelName].findOne({
       slug,
