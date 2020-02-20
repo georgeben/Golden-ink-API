@@ -40,4 +40,5 @@ module.exports.routes = {
   'PUT /api/v1/users/profile': { action: 'users/update-profile' },
   'PUT /api/v1/users/likes/:story': { action: 'users/like-story' },
   'DELETE /api/v1/users/likes/:story': { action: 'users/unlike-story' },
+  'PUT /api/v1/users/topics/:topic': { action: 'users/follow-topic' },
 };
