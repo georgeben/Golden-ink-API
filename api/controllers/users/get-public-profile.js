@@ -24,6 +24,7 @@ module.exports = {
     const user = await Users.findOne({
       slug: inputs.slug,
     }).populate('stories')
+      .populate('topics')
       .populate('likes');
 
     user.stories = user.stories.filter(story => story.private === false && story.draft === false);

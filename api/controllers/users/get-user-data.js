@@ -25,6 +25,7 @@ module.exports = {
         id: this.req.user.id,
       })
         .populate('stories')
+        .populate('topics')
         .populate('likes');
       if (!user) {
         throw 'unauthorized';
