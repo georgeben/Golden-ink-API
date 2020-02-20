@@ -30,8 +30,9 @@ module.exports = {
       private: false,
       draft: false,
     })
-    .populate('comments')
-    .populate('author');
+      .populate('comments')
+      .populate('author')
+      .populate('likedBy');
     if (!story) {
       throw 'notFound';
     }

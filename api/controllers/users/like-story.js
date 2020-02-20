@@ -1,14 +1,14 @@
 module.exports = {
 
 
-  friendlyName: 'Get user story',
+  friendlyName: 'Like story',
 
 
-  description: '',
+  description: 'Adds a story to a user\'s liked stories',
 
 
   inputs: {
-    slug: {
+    story: {
       type: 'string',
       required: true,
     }
@@ -25,17 +25,18 @@ module.exports = {
 
   fn: async function (inputs) {
     const story = await Stories.findOne({
-      slug: inputs.slug,
-      author: this.req.user.id,
-    })
-      .populate('comments')
-      .populate('author')
-      .populate('likedBy');
+      slug: inputs.story,
+      private: false,
+      draft: false,
+    });
     if (!story) {
       throw 'notFound';
     }
+    const user = this.req.user;
+
+    await Users.addToCollection(user.id, 'likes', story.id);
     return {
-      data: story,
+      message: 'Successfully added story to likes'
     };
 
   }

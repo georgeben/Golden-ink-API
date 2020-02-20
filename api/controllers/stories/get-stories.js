@@ -19,7 +19,8 @@ module.exports = {
       draft: false,
     })
       .populate('comments')
-      .populate('author');
+      .populate('author')
+      .populate('likedBy');
     // All done.
     return {
       data: publiclyAvailableStories,

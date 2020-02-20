@@ -24,7 +24,8 @@ module.exports = {
       const user = await Users.findOne({
         id: this.req.user.id,
       })
-      .populate('stories');
+        .populate('stories')
+        .populate('likes');
       if (!user) {
         throw 'unauthorized';
       }

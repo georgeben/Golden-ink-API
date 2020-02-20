@@ -23,7 +23,8 @@ module.exports = {
   fn: async function (inputs) {
     const user = await Users.findOne({
       slug: inputs.slug,
-    }).populate('stories');
+    }).populate('stories')
+      .populate('likes');
 
     user.stories = user.stories.filter(story => story.private === false && story.draft === false);
     return {
