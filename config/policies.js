@@ -28,5 +28,6 @@ module.exports.policies = {
   'comments/add-comment': 'isLoggedIn',
   'comments/update-comment': 'isLoggedIn',
   'comments/delete-comment': 'isLoggedIn',
-  'users/like-story': 'isLoggedIn'
+  'users/like-story': 'isLoggedIn',
+  'users/unlike-story': 'isLoggedIn'
 };

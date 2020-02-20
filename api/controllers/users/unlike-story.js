@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Like story',
+  friendlyName: 'Unlike story',
 
 
-  description: 'Adds a story to a user\'s liked stories',
+  description: '',
 
 
   inputs: {
@@ -21,7 +21,7 @@ module.exports = {
       responseType: 'notFound'
     },
     forbidden: {
-      description: 'A user cannot like one story twice',
+      description: 'A user cannot unlike a story that hasn\'t been previously liked',
       responseType: 'forbidden',
     },
   },
@@ -40,14 +40,15 @@ module.exports = {
       id: this.req.user.id,
     })
       .populate('likes');
-    user.likes.forEach(likedStory => {
-      if (likedStory.id === story.id) {
-        throw 'forbidden';
-      }
-    });
-    await Users.addToCollection(user.id, 'likes', story.id);
+
+    const likedStory = user.likes.find(likedStory => likedStory.id === story.id);
+    if (!likedStory) {
+      throw 'forbidden';
+    }
+
+    await Users.removeFromCollection(user.id, 'likes', story.id);
     return {
-      message: 'Successfully added story to likes'
+      message: 'Successfully removed stories from liked stories'
     };
 
   }
