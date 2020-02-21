@@ -26,7 +26,8 @@ module.exports = {
       })
         .populate('stories')
         .populate('topics')
-        .populate('likes');
+        .populate('likes')
+        .populate('favourites');
       if (!user) {
         throw 'unauthorized';
       }

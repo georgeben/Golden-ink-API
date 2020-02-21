@@ -39,6 +39,7 @@ module.exports.routes = {
   'DELETE /api/v1/users/stories/:slug': { action: 'users/delete-story' },
   'PUT /api/v1/users/profile': { action: 'users/update-profile' },
   'PUT /api/v1/users/likes/:story': { action: 'users/like-story' },
+  'PUT /api/v1/users/favourites/:story': { action: 'users/add-favourite' },
   'DELETE /api/v1/users/likes/:story': { action: 'users/unlike-story' },
   'PUT /api/v1/users/topics/:topic': { action: 'users/follow-topic' },
   'DELETE /api/v1/users/topics/:topic': { action: 'users/unfollow-topic' },
