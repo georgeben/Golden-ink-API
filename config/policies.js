@@ -37,4 +37,5 @@ module.exports.policies = {
   'users/get-favourites': 'isLoggedIn',
   'users/add-bookmark': 'isLoggedIn',
   'users/delete-bookmark': 'isLoggedIn',
+  'users/get-bookmarks': 'isLoggedIn',
 };
