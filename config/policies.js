@@ -34,4 +34,5 @@ module.exports.policies = {
   'users/unfollow-topic': 'isLoggedIn',
   'users/add-favourite': 'isLoggedIn',
   'users/remove-favourite': 'isLoggedIn',
+  'users/get-favourites': 'isLoggedIn',
 };

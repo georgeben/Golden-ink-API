@@ -40,6 +40,8 @@ module.exports.routes = {
   'PUT /api/v1/users/profile': { action: 'users/update-profile' },
   'PUT /api/v1/users/likes/:story': { action: 'users/like-story' },
   'PUT /api/v1/users/favourites/:story': { action: 'users/add-favourite' },
+  'GET /api/v1/users/favourites/': { action: 'users/get-favourites' },
+  'PUT /api/v1/users/bookmarks/:story': { action: 'users/add-bookmark' },
   'DELETE /api/v1/users/favourites/:story': { action: 'users/remove-favourite' },
   'DELETE /api/v1/users/likes/:story': { action: 'users/unlike-story' },
   'PUT /api/v1/users/topics/:topic': { action: 'users/follow-topic' },
