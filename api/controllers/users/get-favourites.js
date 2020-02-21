@@ -13,7 +13,6 @@ module.exports = {
 
 
   fn: async function () {
-    // TODO How to select just one field in a query
     const user = await Users.findOne({
       id: this.req.user.id,
     })

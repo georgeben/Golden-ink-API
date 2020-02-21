@@ -45,6 +45,9 @@ module.exports = {
       user: user.id,
     }).fetch();
 
+    // TODO Emit event to create NEW COMMENT notification
+    // TODO If a user is mentioned in a comment, emit event to create a MENTION notification
+
     return {
       message: 'Successfully added comment',
       data: comment,

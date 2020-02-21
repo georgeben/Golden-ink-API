@@ -66,6 +66,8 @@ module.exports = {
         author: user.id,
       };
       const newStory = await Stories.create(storyData).fetch();
+
+      // TODO Emit event to create NEW STORY notification
       return {
         message: 'Successfully created story',
         data: newStory,
