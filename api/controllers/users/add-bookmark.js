@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Add favourite',
+  friendlyName: 'Add bookmark',
 
 
-  description: 'Adds a story to the user\'s favourites',
+  description: 'Adds a story to bookmarks',
 
 
   inputs: {
@@ -21,13 +21,14 @@ module.exports = {
       responseType: 'notFound'
     },
     conflict: {
-      description: 'The story has already been to favourites',
+      description: 'The story has already been to bookmarks',
       responseType: 'conflict',
     }
   },
 
 
   fn: async function (inputs) {
+
     const story = await Stories.findOne({
       slug: inputs.story,
       private: false,
@@ -39,16 +40,16 @@ module.exports = {
     const user = await Users.findOne({
       id: this.req.user.id,
     })
-      .populate('favourites');
+      .populate('bookmarks');
 
-    user.favourites.forEach(fav => {
-      if (fav.id === story.id) {
+    user.bookmarks.forEach(bookmark => {
+      if (bookmark.id === story.id) {
         throw 'conflict';
       }
     });
-    await Users.addToCollection(user.id, 'favourites', story.id);
+    await Users.addToCollection(user.id, 'bookmarks', story.id);
     return {
-      message: 'Successfully added story to user\'s favourites',
+      message: 'Successfully added story to user\'s bookmarks',
     };
 
   }

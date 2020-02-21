@@ -35,4 +35,5 @@ module.exports.policies = {
   'users/add-favourite': 'isLoggedIn',
   'users/remove-favourite': 'isLoggedIn',
   'users/get-favourites': 'isLoggedIn',
+  'users/add-bookmark': 'isLoggedIn',
 };
