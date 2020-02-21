@@ -50,4 +50,5 @@ module.exports.routes = {
   'PUT /api/v1/users/topics/:topic': { action: 'users/follow-topic' },
   'DELETE /api/v1/users/topics/:topic': { action: 'users/unfollow-topic' },
   'PUT /api/v1/users/email-notifications': { action: 'users/update-notifications' },
+  'GET /api/v1/users/feed': { action: 'users/get-feed' },
 };

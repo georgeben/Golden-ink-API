@@ -39,5 +39,6 @@ module.exports.policies = {
   'users/delete-bookmark': 'isLoggedIn',
   'users/get-bookmarks': 'isLoggedIn',
   'auth/decativate-account': 'isLoggedIn',
-  'users/update-notifications': 'isLoggedIn'
+  'users/update-notifications': 'isLoggedIn',
+  'users/get-feed': 'isLoggedIn'
 };
