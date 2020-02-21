@@ -16,16 +16,24 @@ module.exports = {
 
 
   exits: {
-
+    notFound: {
+      description: 'The user was not found',
+      responseType: 'notFound'
+    }
   },
 
 
   fn: async function (inputs) {
     const user = await Users.findOne({
       slug: inputs.slug,
+      deactivated: false
     }).populate('stories')
       .populate('topics')
       .populate('likes');
+
+    if (!user) {
+      throw 'notFound';
+    }
 
     user.stories = user.stories.filter(story => story.private === false && story.draft === false);
     return {

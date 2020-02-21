@@ -9,7 +9,8 @@ module.exports = async function (req, res, proceed) {
     const requestToken = authorizationHeader.split('Bearer').pop().trim();
     const payload = await sails.helpers.decodeAuthToken(requestToken);
     const user = await Users.findOne({
-      id: payload.id
+      id: payload.id,
+      deactivated: false,
     });
     if (!user) {
       return res.unauthorized();
@@ -17,7 +18,7 @@ module.exports = async function (req, res, proceed) {
     req.user = user;
     return proceed();
   } catch (error) {
-    console.log(error);
+    sails.log.error(error);
     switch (error.name) {
       case 'JsonWebTokenError':
         return res.unauthorized();

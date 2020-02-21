@@ -11,6 +11,7 @@
 module.exports.routes = {
   // AUTH ENDPOINTS
   'POST /api/v1/auth/google': { action: 'users/google-sign-in' },
+  'DELETE /api/v1/auth/decativate': { action: 'auth/decativate-account' },
 
   // TOPIC ENDPOINTS
   'GET /api/v1/topics': { action: 'topics/get-topics' },

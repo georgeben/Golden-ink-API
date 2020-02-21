@@ -27,6 +27,10 @@ module.exports = {
     badRequest: {
       description: 'A malformed googleIdToken was sent',
       responseType: 'badRequest'
+    },
+    forbidden: {
+      description: 'The account has been deactivated',
+      responseType: 'forbidden'
     }
   },
 
@@ -38,8 +42,13 @@ module.exports = {
 
       // Check if the user is already registered
       const existingUser = await Users.findOne({
-        googleId: payload.sub
+        googleId: payload.sub,
       });
+      if (existingUser.deactivated) {
+        return this.res.forbidden({
+          message: 'Account is deactivated',
+        });
+      }
       if (existingUser) {
         const token = await sails.helpers.generateAuthToken.with({
           payload: existingUser,
@@ -78,6 +87,10 @@ module.exports = {
     } catch (error) {
       sails.log.error(error);
       if (error.toString().includes('Error: Wrong number of segments in token:')) {
+        throw {
+          badRequest: 'Invalid googleIDToken',
+        };
+      } else if (error.toString().includes('Error: Token used too late')) {
         throw {
           badRequest: 'Invalid googleIDToken',
         };

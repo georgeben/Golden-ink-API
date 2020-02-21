@@ -38,4 +38,5 @@ module.exports.policies = {
   'users/add-bookmark': 'isLoggedIn',
   'users/delete-bookmark': 'isLoggedIn',
   'users/get-bookmarks': 'isLoggedIn',
+  'auth/decativate-account': 'isLoggedIn'
 };
