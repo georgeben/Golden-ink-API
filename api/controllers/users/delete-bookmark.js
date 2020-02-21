@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Remove favourite',
+  friendlyName: 'Delete bookmark',
 
 
-  description: 'Removes a story from a user\'s favourites',
+  description: 'Removes a story from a user\'s bookmarks',
 
 
   inputs: {
@@ -17,7 +17,7 @@ module.exports = {
 
   exits: {
     notFound: {
-      description: 'No story/favourite was found.',
+      description: 'The story/bookmark was not found',
       responseType: 'notFound'
     },
   },
@@ -35,15 +35,15 @@ module.exports = {
     const user = await Users.findOne({
       id: this.req.user.id,
     })
-      .populate('favourites');
-    const favStory = user.favourites.find(favourite => favourite.id === story.id);
-    if (!favStory) {
+      .populate('bookmarks');
+    const bookmarkedStory = user.bookmarks.find(bookmarked => bookmarked.id === story.id);
+    if (!bookmarkedStory) {
       throw 'notFound';
     }
 
-    await Users.removeFromCollection(user.id, 'favourites', story.id);
+    await Users.removeFromCollection(user.id, 'bookmarks', story.id);
     return {
-      message: 'Successfully removed stories from favourites'
+      message: 'Successfully removed stories from bookmarks'
     };
 
   }
