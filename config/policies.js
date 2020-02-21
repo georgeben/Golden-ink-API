@@ -32,5 +32,6 @@ module.exports.policies = {
   'users/unlike-story': 'isLoggedIn',
   'users/follow-topic': 'isLoggedIn',
   'users/unfollow-topic': 'isLoggedIn',
-  'users/add-favourite': 'isLoggedIn'
+  'users/add-favourite': 'isLoggedIn',
+  'users/remove-favourite': 'isLoggedIn',
 };

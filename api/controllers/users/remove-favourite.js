@@ -1,10 +1,10 @@
 module.exports = {
 
 
-  friendlyName: 'Add favourite',
+  friendlyName: 'Remove favourite',
 
 
-  description: 'Adds a story to the user\'s favourites',
+  description: 'Removes a story from a user\'s favourites',
 
 
   inputs: {
@@ -20,10 +20,6 @@ module.exports = {
       description: 'No topic with the specified slug was found in the database.',
       responseType: 'notFound'
     },
-    conflict: {
-      description: 'The story has already been to favourites',
-      responseType: 'conflict',
-    }
   },
 
 
@@ -40,15 +36,14 @@ module.exports = {
       id: this.req.user.id,
     })
       .populate('favourites');
+    const favStory = user.favourites.find(favourite => favourite.id === story.id);
+    if (!favStory) {
+      throw 'notFound';
+    }
 
-    user.favourites.forEach(fav => {
-      if (fav.id === story.id) {
-        throw 'conflict';
-      }
-    });
-    await Users.addToCollection(user.id, 'favourites', story.id);
+    await Users.removeFromCollection(user.id, 'favourites', story.id);
     return {
-      message: 'Successfully added story to user\'s favourites',
+      message: 'Successfully removed stories from favourites'
     };
 
   }
