@@ -16,7 +16,6 @@ module.exports = {
     },
     forUser: {
       model: 'users',
-      via: 'notifications',
     },
     topic: {
       model: 'topics'
