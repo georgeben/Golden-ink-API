@@ -36,7 +36,7 @@ module.exports = {
       throw 'notFound';
     }
 
-    const user = await Users.findOne({
+    let user = await Users.findOne({
       id: this.req.user.id
     })
       .populate('topics');
@@ -46,8 +46,13 @@ module.exports = {
       }
     });
     await Users.addToCollection(user.id, 'topics', topic.id);
+    user = await Users.findOne({
+      id: this.req.user.id,
+    })
+      .populate('topics');
     return {
-      message: 'Successfully followed topic'
+      message: 'Successfully followed topic',
+      data: user.topics
     };
 
   }

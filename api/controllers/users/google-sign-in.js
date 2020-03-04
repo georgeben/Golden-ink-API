@@ -43,12 +43,14 @@ module.exports = {
       // Check if the user is already registered
       const existingUser = await Users.findOne({
         googleId: payload.sub,
-      });
+      })
+        .populate('topics');
       if (existingUser.deactivated) {
         return this.res.forbidden({
           message: 'Account is deactivated',
         });
       }
+      // TODO: User just ID, username, slug and google ID when generating auth tokens
       if (existingUser) {
         const token = await sails.helpers.generateAuthToken.with({
           payload: existingUser,

@@ -20,6 +20,7 @@ module.exports = {
     })
       .populate('comments')
       .populate('author')
+      .populate('topic')
       .populate('likedBy');
     // All done.
     return {

@@ -35,7 +35,7 @@ module.exports = {
       throw 'notFound';
     }
 
-    const user = await Users.findOne({
+    let user = await Users.findOne({
       id: this.req.user.id
     })
       .populate('topics');
@@ -44,8 +44,13 @@ module.exports = {
       throw 'forbidden';
     }
     await Users.removeFromCollection(user.id, 'topics', topic.id);
+    user = await Users.findOne({
+      id: this.req.user.id,
+    })
+      .populate('topics');
     return {
-      message: 'Successfully un-followed topic'
+      message: 'Successfully un-followed topic',
+      data: user.topics,
     };
 
   }
