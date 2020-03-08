@@ -19,7 +19,7 @@ module.exports.policies = {
 
   // '*': true,
   'users/get-user-data': 'isLoggedIn',
-  'users/create-story': 'isLoggedIn',
+  'stories/create-story': 'isLoggedIn',
   'users/get-user-stories': 'isLoggedIn',
   'users/update-story': 'isLoggedIn',
   'users/delete-story': 'isLoggedIn',

@@ -22,6 +22,7 @@ module.exports.routes = {
 
   //STORIES ENDPOINT
   'GET /api/v1/stories': { action: 'stories/get-stories' },
+  'POST /api/v1/stories': { action: 'stories/create-story' },
   'GET /api/v1/stories/:slug': { action: 'stories/get-story' },
   'POST /api/v1/stories/:story/comments': { action: 'comments/add-comment' },
   'GET /api/v1/stories/:story/comments': { action: 'comments/get-comments' },
@@ -33,7 +34,6 @@ module.exports.routes = {
   'GET /api/v1/users': { action: 'users/get-user-data' },
   'GET /api/v1/users/profile/:slug': { action: 'users/get-public-profile' },
   'GET /api/v1/users/find': { action: 'users/check-for-user' },
-  'POST /api/v1/users/stories': { action: 'users/create-story' },
   'GET /api/v1/users/stories': { action: 'users/get-user-stories' },
   'GET /api/v1/users/stories/:slug': { action: 'users/get-user-story' },
   'PUT /api/v1/users/stories/:slug': { action: 'users/update-story' },

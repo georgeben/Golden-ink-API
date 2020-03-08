@@ -27,6 +27,10 @@ module.exports = {
       description: 'The topic a story is related to',
       model: 'topics'
     },
+    imageUrl: {
+      description: 'A cover image for the story',
+      type: 'string'
+    },
     private: {
       description: 'Restricts the access of a story to only the user who created it.',
       type: 'boolean',
