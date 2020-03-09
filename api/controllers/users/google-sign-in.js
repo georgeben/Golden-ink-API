@@ -82,7 +82,7 @@ module.exports = {
       return {
         message: 'Signed up successfully',
         data: {
-          newUser,
+          user: newUser,
           token,
         },
       };

@@ -25,7 +25,8 @@ module.exports = {
       description: 'A unique string used to identify users',
       type: 'string',
       unique: true,
-      maxLength: 50
+      maxLength: 50,
+      required: false,
     },
     slug: {
       type: 'string',
@@ -118,6 +119,7 @@ module.exports = {
       value: recordToCreate.name
     });
     recordToCreate.slug = slug;
+    recordToCreate.username = slug;
     return proceed();
   },
 
