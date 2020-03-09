@@ -45,7 +45,7 @@ module.exports = {
         googleId: payload.sub,
       })
         .populate('topics');
-      if (existingUser.deactivated) {
+      if (existingUser && existingUser.deactivated) {
         return this.res.forbidden({
           message: 'Account is deactivated',
         });
