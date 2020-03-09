@@ -18,6 +18,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    imageUrl: {
+      description: 'A cover image for the story',
+      type: 'string',
+    },
     topicSlug: {
       description: 'The slug of the topic the story belongs',
       type: 'string',
@@ -46,7 +50,7 @@ module.exports = {
   },
 
 
-  fn: async function ({ title, content, topicSlug, private, draft }) {
+  fn: async function ({ title, content, topicSlug, imageUrl, private, draft }) {
     const user = this.req.user;
     try {
       const topic = await Topics.findOne({
@@ -60,6 +64,7 @@ module.exports = {
       const storyData = {
         title,
         content,
+        imageUrl,
         topic: topic.id,
         private,
         draft,
