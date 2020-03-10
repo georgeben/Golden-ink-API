@@ -33,7 +33,7 @@ module.exports = {
       id: this.req.user.id,
     })
       .populate('topics');
-    const feed = [];
+    let feed = [];
     for (let topic of user.topics) {
       const stories = await Stories.find({
         topic: topic.id,
@@ -42,8 +42,9 @@ module.exports = {
       })
         .populate('author')
         .populate('likedBy')
+        .populate('topic')
         .populate('comments');
-      feed.push(stories);
+      feed = [...feed, ...stories];
     }
     return {
       data: feed,

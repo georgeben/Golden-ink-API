@@ -36,7 +36,7 @@ module.exports = {
     if (!story) {
       throw 'notFound';
     }
-    const user = await Users.findOne({
+    let user = await Users.findOne({
       id: this.req.user.id,
     })
       .populate('likes');
@@ -47,8 +47,13 @@ module.exports = {
     }
 
     await Users.removeFromCollection(user.id, 'likes', story.id);
+    user = await Users.findOne({
+      id: this.req.user.id,
+    })
+      .populate('likes');
     return {
-      message: 'Successfully removed stories from liked stories'
+      message: 'Successfully removed stories from liked stories',
+      data: user.likes,
     };
 
   }

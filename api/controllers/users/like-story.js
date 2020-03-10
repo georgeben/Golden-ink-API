@@ -36,7 +36,7 @@ module.exports = {
     if (!story) {
       throw 'notFound';
     }
-    const user = await Users.findOne({
+    let user = await Users.findOne({
       id: this.req.user.id,
     })
       .populate('likes');
@@ -46,9 +46,14 @@ module.exports = {
       }
     });
     await Users.addToCollection(user.id, 'likes', story.id);
+    user = await Users.findOne({
+      id: this.req.user.id,
+    })
+      .populate('likes');
     // TODO Emit event to create LIKE story notification
     return {
-      message: 'Successfully added story to likes'
+      message: 'Successfully added story to likes',
+      data: user.likes,
     };
 
   }
