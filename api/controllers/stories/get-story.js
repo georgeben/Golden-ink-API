@@ -31,6 +31,7 @@ module.exports = {
       draft: false,
     })
       .populate('comments')
+      .populate('topic')
       .populate('author')
       .populate('likedBy');
     if (!story) {

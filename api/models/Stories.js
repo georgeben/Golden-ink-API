@@ -19,6 +19,11 @@ module.exports = {
       type: 'string',
       required: true
     },
+    formattedContent: {
+      description: 'The formated content of the story',
+      type: 'string',
+      required: true,
+    },
     slug: {
       type: 'string',
       unique: true,
