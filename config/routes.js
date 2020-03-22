@@ -33,7 +33,7 @@ module.exports.routes = {
   // USER ENDPOINTS
   'GET /api/v1/users': { action: 'users/get-user-data' },
   'GET /api/v1/users/profile/:username': { action: 'users/get-public-profile' },
-  'GET /api/v1/users/:username/stories': { action: 'get-stories-by-user'},
+  'GET /api/v1/users/:username/stories': { action: 'users/get-stories-by-user'},
   'GET /api/v1/users/find': { action: 'users/check-for-user' },
   'GET /api/v1/users/stories': { action: 'users/get-user-stories' },
   'GET /api/v1/users/stories/:slug': { action: 'users/get-user-story' },
@@ -52,4 +52,6 @@ module.exports.routes = {
   'DELETE /api/v1/users/topics/:topic': { action: 'users/unfollow-topic' },
   'PUT /api/v1/users/email-notifications': { action: 'users/update-notifications' },
   'GET /api/v1/users/feed': { action: 'users/get-feed' },
+
+  'GET /api/v1/search': { action: 'search' }
 };
