@@ -69,14 +69,5 @@ module.exports = {
     return proceed();
   },
 
-  beforeUpdate: async function (valuesToSet, proceed) {
-    if (!valuesToSet.title) {
-      return proceed();
-    }
-    const slug = await sails.helpers.createSlug('stories', valuesToSet.title);
-    valuesToSet.slug = slug;
-    return proceed();
-  }
-
 };
 
