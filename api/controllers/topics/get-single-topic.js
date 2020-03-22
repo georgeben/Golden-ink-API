@@ -26,7 +26,8 @@ module.exports = {
   fn: async function (inputs) {
     const topic = await Topics.findOne({
       slug: inputs.slug,
-    });
+    })
+      .populate('followers');
 
     if (!topic) {
       throw 'notFound';
