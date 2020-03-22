@@ -29,6 +29,7 @@ module.exports = {
       author: this.req.user.id,
     })
       .populate('comments')
+      .populate('topic')
       .populate('author')
       .populate('likedBy');
     if (!story) {

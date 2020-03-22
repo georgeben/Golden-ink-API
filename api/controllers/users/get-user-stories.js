@@ -21,7 +21,9 @@ module.exports = {
       const stories = await Stories.find({
         author: user.id
       })
-      .populate('comments')
+        .sort('updatedAt DESC')
+        .populate('comments')
+        .populate('topic')
       .populate('author');
 
       return {
