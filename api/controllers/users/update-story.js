@@ -21,6 +21,15 @@ module.exports = {
       description: 'The content of the story',
       type: 'string',
     },
+    formattedContent: {
+      description: 'The formated content of the story',
+      type: 'string',
+      required: true
+    },
+    imageUrl: {
+      description: 'A cover image for the story',
+      type: 'string',
+    },
     topicSlug: {
       description: 'The slug of the topic the story belongs',
       type: 'string',
@@ -89,7 +98,12 @@ module.exports = {
         }
         updatedData.topic = topic.id;
       }
-
+      // Check if the story title has changed
+      if (updatedData.title !== story.title) {
+        // Create a new slug
+        const slug = await sails.helpers.createSlug('stories', updatedData.title);
+        updatedData.slug = slug;
+      }
       // Update the story
       const updatedStory = await Stories.updateOne({
         slug,
