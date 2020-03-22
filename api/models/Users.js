@@ -10,7 +10,8 @@ module.exports = {
   attributes: {
     name: {
       type: 'string',
-      required: true
+      required: true,
+      columnType: 'citext',
     },
     email: {
       description: 'A user\'s email address',
@@ -27,6 +28,7 @@ module.exports = {
       unique: true,
       maxLength: 50,
       required: false,
+      columnType: 'citext',
     },
     slug: {
       type: 'string',
@@ -35,7 +37,8 @@ module.exports = {
     headline: {
       description: 'A user\'s profile headline',
       type: 'string',
-      example: 'Business Analyst'
+      example: 'Business Analyst',
+      columnType: 'citext',
     },
     bio: {
       description: 'A short introduction about a user',

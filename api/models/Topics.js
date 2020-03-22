@@ -12,6 +12,7 @@ module.exports = {
       type: 'string',
       required: true,
       unique: true,
+      columnType: 'citext',
     },
     imageUrl: {
       type: 'string',

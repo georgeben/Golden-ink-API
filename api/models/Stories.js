@@ -12,12 +12,14 @@ module.exports = {
     title: {
       description: 'The title of the story',
       type: 'string',
-      required: true
+      required: true,
+      columnType: 'citext',
     },
     content: {
       description: 'The content of the story',
       type: 'string',
-      required: true
+      required: true,
+      columnType: 'citext',
     },
     formattedContent: {
       description: 'The formated content of the story',
