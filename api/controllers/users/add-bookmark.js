@@ -37,7 +37,7 @@ module.exports = {
     if (!story) {
       throw 'notFound';
     }
-    const user = await Users.findOne({
+    let user = await Users.findOne({
       id: this.req.user.id,
     })
       .populate('bookmarks');
@@ -48,8 +48,13 @@ module.exports = {
       }
     });
     await Users.addToCollection(user.id, 'bookmarks', story.id);
+    user = await Users.findOne({
+      id: this.req.user.id,
+    })
+      .populate('bookmarks');
     return {
       message: 'Successfully added story to user\'s bookmarks',
+      data: user.bookmarks,
     };
 
   }

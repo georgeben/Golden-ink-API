@@ -8,7 +8,7 @@ module.exports = {
 
 
   inputs: {
-    slug: {
+    username: {
       type: 'string',
       required: true,
     }
@@ -25,7 +25,7 @@ module.exports = {
 
   fn: async function (inputs) {
     const user = await Users.findOne({
-      slug: inputs.slug,
+      username: inputs.username,
       deactivated: false
     }).populate('stories')
       .populate('topics')
