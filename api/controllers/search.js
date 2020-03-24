@@ -40,10 +40,20 @@ module.exports = {
 
     const storyResults = await Stories.find({
       or: [
-        { title: { contains: query } },
-        { content: { contains: query } },
+        {
+          title: { contains: query },
+          draft: false,
+          private: false,
+        },
+        {
+          content: { contains: query },
+          draft: false,
+          private: false,
+        },
       ]
-    });
+    })
+      .populate('author')
+      .populate('likedBy');
 
     return {
       data: {
