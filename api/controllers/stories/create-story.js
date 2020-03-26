@@ -84,7 +84,9 @@ module.exports = {
         message: 'Successfully created story',
         data: newStory,
       });
-
+      if (newStory.draft || newStory.private) {
+        return;
+      }
       const notificationData = {
         name: 'notification',
         notificationType: 'NEW_STORY',
@@ -92,6 +94,17 @@ module.exports = {
         fromUser: user.id,
         topic: topic.id
       };
+
+      const author = await Users.findOne({
+        id: user.id,
+      });
+      Stories.publish([topic.id], {
+        actionType: 'NEW_STORY',
+        topic: topic,
+        story: newStory,
+        fromUser: author,
+        read: false
+      });
 
       return sails.helpers.sendToQueue(notificationQueue, notificationData);
     } catch (error) {
@@ -103,6 +116,5 @@ module.exports = {
     }
 
   }
-
 
 };

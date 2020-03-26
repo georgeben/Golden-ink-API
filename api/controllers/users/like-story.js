@@ -64,6 +64,13 @@ module.exports = {
       message: 'Successfully added story to likes',
       data: user.likes,
     });
+    Notifications.publish(story.author, { 
+      actionType: 'LIKE',
+      forUser: story.author,
+      story: story,
+      fromUser: user,
+      read: false
+    });
     return sails.helpers.sendToQueue(notificationQueue, data);
 
   }

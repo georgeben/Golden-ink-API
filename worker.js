@@ -41,12 +41,13 @@ async function consumeFromQueue(queue) {
 
           switch (data.notificationType) {
             case 'LIKE': {
-              await Notifications.create({
+              const createdNotification = await Notifications.create({
                 actionType: data.notificationType,
                 forUser: data.forUser,
                 story: data.storyID,
                 fromUser: data.fromUser,
-              });
+              }).fetch();
+              sails.log.info({ createdNotification });
               return channel.ack(message);
             }
             case 'NEW_STORY':{
