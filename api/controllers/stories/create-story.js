@@ -1,3 +1,5 @@
+const { notificationQueue } = require('../../../constants');
+
 module.exports = {
 
 
@@ -78,11 +80,20 @@ module.exports = {
       };
       const newStory = await Stories.create(storyData).fetch();
 
-      // TODO Emit event to create NEW STORY notification
-      return {
+      this.res.json({
         message: 'Successfully created story',
         data: newStory,
+      });
+
+      const notificationData = {
+        name: 'notification',
+        notificationType: 'NEW_STORY',
+        storyID: newStory.id,
+        fromUser: user.id,
+        topic: topic.id
       };
+
+      return sails.helpers.sendToQueue(notificationQueue, notificationData);
     } catch (error) {
       sails.log.error(error);
       if (error.badRequest) {

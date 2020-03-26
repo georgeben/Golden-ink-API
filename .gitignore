@@ -139,3 +139,5 @@ lib-cov
 !.elasticbeanstalk/*.global.yml
 
 .ebextensions/*
+
+.env

@@ -40,5 +40,6 @@ module.exports.policies = {
   'users/get-bookmarks': 'isLoggedIn',
   'auth/decativate-account': 'isLoggedIn',
   'users/update-notifications': 'isLoggedIn',
-  'users/get-feed': 'isLoggedIn'
+  'users/get-feed': 'isLoggedIn',
+  'users/notifications': 'isLoggedIn',
 };

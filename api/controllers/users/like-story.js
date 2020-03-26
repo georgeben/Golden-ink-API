@@ -1,3 +1,5 @@
+const { notificationQueue } = require('../../../constants');
+
 module.exports = {
 
 
@@ -50,11 +52,19 @@ module.exports = {
       id: this.req.user.id,
     })
       .populate('likes');
-    // TODO Emit event to create LIKE story notification
-    return {
+
+    const data = {
+      name: 'notification',
+      notificationType: 'LIKE',
+      storyID: story.id,
+      fromUser: this.req.user.id,
+      forUser: story.author,
+    };
+    this.res.status(200).json({
       message: 'Successfully added story to likes',
       data: user.likes,
-    };
+    });
+    return sails.helpers.sendToQueue(notificationQueue, data);
 
   }
 

@@ -6,6 +6,9 @@
   "keywords": [],
   "dependencies": {
     "@sailshq/lodash": "^3.10.3",
+    "amqplib": "^0.5.5",
+    "concurrently": "^5.1.0",
+    "dotenv": "^8.2.0",
     "google-auth-library": "^5.9.2",
     "jsonwebtoken": "^8.5.1",
     "sails": "^1.2.3",
@@ -21,6 +24,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node app.js",
+    "start:dev": "concurrently \"node app.js\" \"node worker.js\"",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
     "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
