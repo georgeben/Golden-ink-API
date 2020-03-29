@@ -62,7 +62,8 @@ module.exports = {
     try {
       const topic = await Topics.findOne({
         slug: topicSlug,
-      });
+      })
+        .populate('followers');
       if (!topic) {
         throw {
           badRequest: 'Unknown topic',
@@ -98,13 +99,16 @@ module.exports = {
       const author = await Users.findOne({
         id: user.id,
       });
-      Stories.publish([topic.id], {
-        actionType: 'NEW_STORY',
-        topic: topic,
-        story: newStory,
-        fromUser: author,
-        read: false
-      });
+
+      for (let follower of topic.followers) {
+        Notifications.publish([follower.id], {
+          actionType: 'NEW_STORY',
+          forUser: follower.id,
+          story: newStory,
+          fromUser: author,
+          read: false
+        });
+      }
 
       return sails.helpers.sendToQueue(notificationQueue, notificationData);
     } catch (error) {

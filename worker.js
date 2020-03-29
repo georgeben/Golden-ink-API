@@ -51,12 +51,19 @@ async function consumeFromQueue(queue) {
               return channel.ack(message);
             }
             case 'NEW_STORY':{
-              await Notifications.create({
-                actionType: data.notificationType,
-                topic: data.topic,
-                story: data.storyID,
-                fromUser: data.fromUser
-              }).fetch();
+              const topic = await Topics.findOne({
+                id: data.topic
+              })
+                .populate('followers');
+              for (let follower of topic.followers) {
+                await Notifications.create({
+                  actionType: data.notificationType,
+                  topic: data.topic,
+                  story: data.storyID,
+                  fromUser: data.fromUser,
+                  forUser: follower.id,
+                });
+              }
               return channel.ack(message);
             }
           }

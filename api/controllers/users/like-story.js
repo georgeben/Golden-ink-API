@@ -64,7 +64,16 @@ module.exports = {
       message: 'Successfully added story to likes',
       data: user.likes,
     });
-    Notifications.publish(story.author, { 
+    const notification = await Notifications.findOne({
+      fromUser: this.req.user.id,
+      forUser: story.author,
+      actionType: 'LIKE',
+      story: story.id,
+    });
+    if (notification) {
+      return;
+    }
+    Notifications.publish([story.author], {
       actionType: 'LIKE',
       forUser: story.author,
       story: story,

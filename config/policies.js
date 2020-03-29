@@ -42,4 +42,5 @@ module.exports.policies = {
   'users/update-notifications': 'isLoggedIn',
   'users/get-feed': 'isLoggedIn',
   'users/notifications': 'isLoggedIn',
+  'users/update-notification-status': 'isLoggedIn'
 };
