@@ -39,18 +39,22 @@ module.exports = {
     }
     const user = this.req.user;
 
-    const comment = await Comments.create({
+    let comment = await Comments.create({
       content: inputs.content,
       story: story.id,
       user: user.id,
     }).fetch();
+    const createdComment = await Comments.findOne({
+      id: comment.id
+    })
+      .populate('user');
 
     // TODO Emit event to create NEW COMMENT notification
     // TODO If a user is mentioned in a comment, emit event to create a MENTION notification
 
     return {
       message: 'Successfully added comment',
-      data: comment,
+      data: createdComment,
     };
 
   }

@@ -22,13 +22,14 @@ module.exports = {
       model: 'stories',
       required: true
     },
-    subComments: {
+    /*  subComments: {
       collection: 'comments',
       via: 'parentComment'
     },
     parentComment: {
       model: 'comments',
     }
+    */
 
   },
 

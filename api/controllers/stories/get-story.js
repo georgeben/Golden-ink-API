@@ -30,7 +30,6 @@ module.exports = {
       private: false,
       draft: false,
     })
-      .populate('comments')
       .populate('topic')
       .populate('author')
       .populate('likedBy');
