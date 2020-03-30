@@ -36,8 +36,7 @@ module.exports = {
     const comments = await Comments.find({
       story: story.id,
     })
-      .populate('user')
-      .populate('subComments');
+      .populate('user');
     // All done.
     return {
       data: comments,

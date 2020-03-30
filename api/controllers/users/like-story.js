@@ -53,6 +53,11 @@ module.exports = {
     })
       .populate('likes');
 
+    this.res.status(200).json({
+      message: 'Successfully added story to likes',
+      data: user.likes,
+    });
+
     const data = {
       name: 'notification',
       notificationType: 'LIKE',
@@ -60,10 +65,6 @@ module.exports = {
       fromUser: this.req.user.id,
       forUser: story.author,
     };
-    this.res.status(200).json({
-      message: 'Successfully added story to likes',
-      data: user.likes,
-    });
     const notification = await Notifications.findOne({
       fromUser: this.req.user.id,
       forUser: story.author,

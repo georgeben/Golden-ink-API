@@ -42,7 +42,6 @@ module.exports = {
       story: story.id,
     })
       .populate('user')
-      .populate('subComments');
 
     if (!comment) {
       throw 'notFound';

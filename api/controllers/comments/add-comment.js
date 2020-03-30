@@ -1,3 +1,4 @@
+const { notificationQueue } = require('../../../constants');
 module.exports = {
 
 
@@ -49,13 +50,30 @@ module.exports = {
     })
       .populate('user');
 
+    this.res.status(201).json({
+      message: 'Successfully added comment',
+      data: createdComment,
+    });
+
     // TODO Emit event to create NEW COMMENT notification
     // TODO If a user is mentioned in a comment, emit event to create a MENTION notification
 
-    return {
-      message: 'Successfully added comment',
-      data: createdComment,
+    const notificationData = {
+      name: 'notification',
+      notificationType: 'COMMENT',
+      storyID: story.id,
+      fromUser: user.id,
+      forUser: story.author,
     };
+    Notifications.publish([story.author], {
+      actionType: 'COMMENT',
+      forUser: story.author,
+      story: story,
+      fromUser: user,
+      read: false
+    });
+    return sails.helpers.sendToQueue(notificationQueue, notificationData);
+
 
   }
 

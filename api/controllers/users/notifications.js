@@ -26,7 +26,8 @@ module.exports = {
     })
       .populate('story')
       .populate('topic')
-      .populate('fromUser');
+      .populate('fromUser')
+      .sort('createdAt DESC');
 
     if (this.req.isSocket) {
       Notifications.subscribe(this.req, [this.req.user.id]);

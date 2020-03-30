@@ -66,6 +66,16 @@ async function consumeFromQueue(queue) {
               }
               return channel.ack(message);
             }
+            case 'COMMENT': {
+              const createdNotification = await Notifications.create({
+                actionType: data.notificationType,
+                forUser: data.forUser,
+                story: data.storyID,
+                fromUser: data.fromUser
+              }).fetch();
+              sails.log.info({ createdNotification });
+              return channel.ack(message);
+            }
           }
         }
       },
