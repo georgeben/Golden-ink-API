@@ -19,7 +19,7 @@ module.exports = {
 
   exits: {
     notFound: {
-      description: 'No topic with the specified slug was found in the database.',
+      description: 'No story with the specified slug was found in the database.',
       responseType: 'notFound'
     },
     forbidden: {

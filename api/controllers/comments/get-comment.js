@@ -42,6 +42,7 @@ module.exports = {
       story: story.id,
     })
       .populate('user')
+      .populate('likedBy');
 
     if (!comment) {
       throw 'notFound';

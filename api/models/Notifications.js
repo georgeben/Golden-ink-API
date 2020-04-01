@@ -23,6 +23,9 @@ module.exports = {
     story: {
       model: 'stories'
     },
+    comment: {
+      model: 'comments',
+    },
     fromUser: {
       model: 'users'
     },

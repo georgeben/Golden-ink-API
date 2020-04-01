@@ -48,14 +48,14 @@ module.exports = {
     const createdComment = await Comments.findOne({
       id: comment.id
     })
-      .populate('user');
+      .populate('user')
+      .populate('likedBy');
 
     this.res.status(201).json({
       message: 'Successfully added comment',
       data: createdComment,
     });
 
-    // TODO Emit event to create NEW COMMENT notification
     // TODO If a user is mentioned in a comment, emit event to create a MENTION notification
 
     const notificationData = {

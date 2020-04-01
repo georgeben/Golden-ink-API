@@ -22,6 +22,9 @@ module.exports = {
       model: 'stories',
       required: true
     },
+    likedBy: {
+      collection: 'users'
+    },
     /*  subComments: {
       collection: 'comments',
       via: 'parentComment'
