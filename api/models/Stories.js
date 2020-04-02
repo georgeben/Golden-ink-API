@@ -38,6 +38,10 @@ module.exports = {
       description: 'A cover image for the story',
       type: 'string'
     },
+    imageCloudinaryId: {
+      description: 'The cloudinary photo ID of the uploaded cover image',
+      type: 'string',
+    },
     private: {
       description: 'Restricts the access of a story to only the user who created it.',
       type: 'boolean',
