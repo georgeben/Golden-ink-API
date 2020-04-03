@@ -31,7 +31,7 @@ First off, I found out that many of the materials for learning sails such as blo
 6. Run `sails lift`⚡️🚢
 
 ### Contributing
-Contributions are welcome. You can add a new feature, find a bug, etc. Just do whatever you want with it, as long as you learn something.
+Contributions are welcome. Been busy with other things lately, so there's a little unfinished part. You can add a new feature, find a bug, etc. Just do whatever you want with it, as long as you learn something.
 
 ### Author
 George Benjamin
