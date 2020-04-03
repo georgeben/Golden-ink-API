@@ -1,133 +1,89 @@
-module.exports = {
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
 
-
-  friendlyName: 'Update story',
-
-
-  description: 'Updates data about a story',
-
-
-  inputs: {
-    slug: {
-      description: 'The slug of the story to update',
-      type: 'string',
-      required: true,
-    },
-    title: {
-      description: 'The title of the story',
-      type: 'string',
-    },
-    content: {
-      description: 'The content of the story',
-      type: 'string',
-    },
-    formattedContent: {
-      description: 'The formated content of the story',
-      type: 'string',
-      required: true
-    },
-    imageUrl: {
-      description: 'A cover image for the story',
-      type: 'string',
-    },
-    topicSlug: {
-      description: 'The slug of the topic the story belongs',
-      type: 'string',
-    },
-    private: {
-      description: 'Restricts the access of a story to only the user who created it.',
-      type: 'boolean',
-    },
-    draft: {
-      description: 'An unfinished story',
-      type: 'boolean',
-    },
-  },
-
-
-  exits: {
-    badRequest: {
-      description: 'invalid request data',
-      responseType: 'badRequest',
-    },
-    forbidden: {
-      description: 'The user is restricted from updating the story',
-      responseType: 'forbidden',
-    },
-    notFound: {
-      description: 'The story to update was not found',
-      responseType: 'notFound',
-    },
-    serverError: {
-      description: 'Something unexpected happened',
-      responseType: 'serverError'
-    }
-  },
-
-
-  fn: async function ({ slug, ...storyData }) {
-    const user = this.req.user;
-    const updatedData = storyData;
-    // Find the story
-    try {
-      const story = await Stories.findOne({
-        slug,
+module.exports = async function (req, res) {
+  const user = req.user;
+  const updatedData = req.body;
+  const slug = req.params.slug;
+  try {
+    const story = await Stories.findOne({
+      slug,
+    });
+    if (!story) {
+      return res.status(404).json({
+        error: 'The story you are trying to update does not exist.'
       });
-      if (!story) {
-        throw {
-          notFound: 'The specified story  does not exist'
-        };
-      }
+    }
 
-      // Check if the person sending the update req is the author of the story
-      if (story.author !== user.id) {
-        throw {
-          forbidden: 'You cannot perform this action'
-        };
-      }
+    // Check if the person sending the update req is the author of the story
+    if (story.author !== user.id) {
+      return res.status(403).json({
+        message: 'You cannot perform this action'
+      });
+    }
 
-      if (storyData.topicSlug) {
-        // if the user is updating the story's topic, i want to check if that topic exists
-        const topic = await Topics.findOne({
-          slug: storyData.topicSlug,
+    if (updatedData.topicSlug) {
+      // if the user is updating the story's topic, i want to check if that topic exists
+      const topic = await Topics.findOne({
+        slug: updatedData.topicSlug,
+      });
+      if (!topic) {
+        return res.status(404).json({
+          error: 'The topic for story does not exists'
         });
-        if (!topic) {
-          throw {
-            badRequest: 'Unknown topic',
-          };
-        }
+      }
+      if (topic.id !== story.topic) {
         updatedData.topic = topic.id;
       }
-      // Check if the story title has changed
-      if (updatedData.title !== story.title) {
-        // Create a new slug
-        const slug = await sails.helpers.createSlug('stories', updatedData.title);
-        updatedData.slug = slug;
-      }
-      // Update the story
-      const updatedStory = await Stories.updateOne({
-        slug,
-      }).set(updatedData);
-
-      return {
-        message: 'Successfully updated story',
-        data: updatedStory,
-      };
-    } catch (error) {
-      sails.log.error(error);
-      switch (Object.keys(error)[0]) {
-        case 'badRequest':
-          throw error;
-        case 'notFound':
-          throw error;
-        case 'forbidden':
-          throw error;
-        default:
-          throw 'serverError';
-      }
     }
 
-  }
+    // Check for file
+    req.file('coverPhoto').upload(
+      {
+        maxBytes: 5120000
+      },
+      async function uploadComplete(err, uploadedFiles) {
+        if (err) {
+          return res.status(500).json({
+            error: 'Something bad happened',
+          });
+        }
+        if (uploadedFiles.length > 0) {
+          const uploadedImage = await sails.helpers.cloudinaryUpload.with({
+            path: uploadedFiles[0].fd,
+            directory: 'stories'
+          });
+          // Delete the image
+          await fs.unlinkAsync(uploadedFiles[0].fd);
+          updatedData.imageUrl = uploadedImage.secure_url;
+          updatedData.imageCloudinaryId = uploadedImage.public_id;
+        }
+        if (Boolean(updatedData.removeCover)) {
+          updatedData.imageUrl = '';
+          updatedData.imageCloudinaryId = '';
+        }
+        // Check if the story title has changed
+        if (updatedData.title !== story.title) {
+          // Create a new slug
+          const slug = await sails.helpers.createSlug('stories', updatedData.title);
+          updatedData.slug = slug;
+        }
+        // Update the story
+        const updatedStory = await Stories.updateOne({
+          slug,
+        }).set(updatedData);
 
+        return res.status(200).json({
+          message: 'Successfully updated story',
+          data: updatedStory,
+        });
+      }
+    );
+  } catch (error) {
+    sails.log.error(error);
+    return res.status(500).json({
+      error: 'Something bad happened',
+    });
+  }
 
 };

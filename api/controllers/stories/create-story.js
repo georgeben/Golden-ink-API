@@ -17,9 +17,12 @@ module.exports = async function (req, res) {
       slug: topicSlug
     }).populate('followers');
     if (!topic) {
-      throw {
+      /* throw {
         badRequest: 'Unknown topic'
-      };
+      }; */
+      return res.status(404).json({
+        error: 'The topic for story does not exists'
+      });
     }
     const storyData = {
       title,
@@ -37,7 +40,10 @@ module.exports = async function (req, res) {
       },
       async function uploadComplete(err, uploadedFiles) {
         if (err) {
-          throw 'serverError';
+          // throw 'serverError';
+          return res.status(500).json({
+            error: 'Something bad happened',
+          })
         }
         if (uploadedFiles.length > 0) {
           const uploadedImage = await sails.helpers.cloudinaryUpload.with({
@@ -82,10 +88,9 @@ module.exports = async function (req, res) {
     );
   } catch (error) {
     sails.log.error(error);
-    if (error.badRequest) {
-      throw error;
-    }
-    throw 'serverError';
+    return res.status(500).json({
+      error: 'Something bad happened',
+    })
   }
 };
 
