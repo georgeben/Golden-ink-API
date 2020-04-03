@@ -1,6 +1,40 @@
-# golden-ink-api
+# Golden-ink-api
+The number one platform for writers. 
 
-a [Sails v1](https://sailsjs.com) application
+A [Sails v1](https://sailsjs.com) application
+
+### Motivation
+First off, I found out that many of the materials for learning sails such as blog posts, video courses, sample applications were very outdated 😢. So I built this to demonstrate how Sails.js can be used in creating real-world web APIs with many of the common modern features such as realtime updates, OAuth, etc as of 2020. This project hopes to help the curious have an idea of how Sails.js works, have a feel of some of the benefits and awesomeness of Sails, a reference to implement common features in your Sails application.
+
+### Technologies
+- Sails.js
+- PostgreSQL
+- RabbitMQ
+
+### Features
+- Google OAuth
+- CRUD API
+- Action2
+- Permissions using policies
+- File uploads to Cloudinary
+- Task queues with RabbitMQ
+- JWT authentication
+- Waterline ORM
+- Realtime client-server communication using Resourceful PubSub
+
+### Set up
+1. Clone this repository
+2. `cd` into the repository
+3. Run `npm install`
+4. Create a `config/local.js` file to store credentials
+5. Create a PostgreSQL database
+6. Run `sails lift`⚡️🚢
+
+### Contributing
+Contributions are welcome. You can add a new feature, find a bug, etc. Just do whatever you want with it, as long as you learn something.
+
+### Author
+George Benjamin
 
 
 ### Links
