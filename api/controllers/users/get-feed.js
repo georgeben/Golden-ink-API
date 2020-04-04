@@ -10,11 +10,13 @@ module.exports = {
   inputs: {
     offset: {
       description: 'The number of records to skip',
-      type: 'number'
+      type: 'number',
+      defaultsTo: 0
     },
     limit: {
       description: 'The maximum number of records to receive',
-      type: 'number'
+      type: 'number',
+      defaultsTo: 9
     }
   },
 
@@ -25,29 +27,41 @@ module.exports = {
 
 
   fn: async function (inputs) {
-    // TODO A user's feed is just a collection of all the stories that have been posted in all
+    // A user's feed is just a collection of all the stories that have been posted in all
     // the topics a user follows
-    // All done.
 
     const user = await Users.findOne({
       id: this.req.user.id,
     })
       .populate('topics');
-    let feed = [];
-    for (let topic of user.topics) {
-      const stories = await Stories.find({
-        topic: topic.id,
+    const topicIds = _.pluck(user.topics, 'id');
+
+    const feed = await Stories.find({
+      where: {
+        topic: topicIds,
         private: false,
         draft: false,
-      })
-        .populate('author')
-        .populate('likedBy')
-        .populate('topic')
-        .populate('comments');
-      feed = [...feed, ...stories];
-    }
+      }
+    })
+      .skip(inputs.offset)
+      .limit(inputs.limit)
+      .populate('author')
+      .populate('likedBy')
+      .populate('topic')
+      .populate('comments')
+      .sort('updatedAt DESC');
+    const count = await Stories.count({
+      where: {
+        topic: topicIds,
+        private: false,
+        draft: false,
+      }
+    })
     return {
-      data: feed,
+      data: {
+        feed,
+        count
+      },
     };
 
   }
