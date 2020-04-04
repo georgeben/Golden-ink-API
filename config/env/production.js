@@ -342,6 +342,24 @@ module.exports = {
     accessKey: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     s3baseUrl: process.env.AWS_S3_BASEURL
+  },
+  rabbitMQ: {
+    connectionOpts: {
+      protocol: 'amqp',
+      hostname: process.env.RABBIT_HOSTNAME,
+      port: process.env.RABBIT_PORT,
+      username: process.env.RABBIT_USERNAME,
+      password: process.env.RABBIT_PASSWORD,
+      locale: '',
+      frameMax: 0,
+      heartbeat: 0,
+      vhost: '/',
+    }
+  },
+  cloudinary: {
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
   }
 
 

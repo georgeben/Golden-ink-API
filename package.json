@@ -13,6 +13,7 @@
     "dotenv": "^8.2.0",
     "google-auth-library": "^5.9.2",
     "jsonwebtoken": "^8.5.1",
+    "pm2": "^4.2.3",
     "sails": "^1.2.3",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
@@ -25,7 +26,7 @@
     "eslint": "5.16.0"
   },
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "start:dev": "concurrently \"node app.js\" \"node worker.js\"",
     "test": "npm run lint && npm run custom-tests && echo 'Done.'",
     "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
