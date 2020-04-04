@@ -56,7 +56,7 @@ module.exports = {
         private: false,
         draft: false,
       }
-    })
+    });
     return {
       data: {
         feed,
