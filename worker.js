@@ -15,10 +15,10 @@ async function consumeFromQueue(queue) {
   try {
     const cluster = await amqp.connect({
       protocol: 'amqp',
-      hostname: process.env.HOSTNAME,
-      port: process.env.PORT,
-      username: process.env.USERNAME,
-      password: process.env.PASSWORD,
+      hostname: process.env.RABBIT_HOSTNAME,
+      port: process.env.RABBIT_PORT,
+      username: process.env.RABBIT_USERNAME,
+      password: process.env.RABBIT_PASSWORD,
       locale: 'en_US',
       frameMax: 0,
       heartbeat: 0,
