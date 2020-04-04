@@ -151,7 +151,7 @@ module.exports = {
     ***************************************************************************/
     cors: {
       allRoutes: true,
-      allowOrigins: ['http://localhost:8080'],
+      allowOrigins: ['https://goldenink.netlify.com/'],
       allowRequestHeaders: 'authorization, content-type'
     },
 
@@ -194,7 +194,7 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-    onlyAllowOrigins: [],
+    onlyAllowOrigins: ['https://goldenink.netlify.com/'],
 
 
     /***************************************************************************
