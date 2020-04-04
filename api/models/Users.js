@@ -56,6 +56,10 @@ module.exports = {
       type: 'string',
       defaultsTo: '',
     },
+    profilePhotoCloudinaryId: {
+      description: 'The cloudinary ID of the user\'s profile photo',
+      type: 'string',
+    },
     topics: {
       // A user can follow many topics, and a topic can be followed by many users
       description: 'A collection of topics a user follows',

@@ -43,7 +43,7 @@ module.exports = async function (req, res) {
           // throw 'serverError';
           return res.status(500).json({
             error: 'Something bad happened',
-          })
+          });
         }
         if (uploadedFiles.length > 0) {
           const uploadedImage = await sails.helpers.cloudinaryUpload.with({
